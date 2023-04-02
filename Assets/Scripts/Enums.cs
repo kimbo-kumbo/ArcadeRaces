@@ -14,6 +14,7 @@ namespace RacePrototype
         MainMenu,
         Drive,
         Tuning,
+        Restart,
         Exit
     }
 }

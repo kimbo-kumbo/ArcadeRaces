@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
+using System;
 
 namespace RacePrototype
 {
@@ -17,6 +18,7 @@ namespace RacePrototype
         private StatisticsPanel_Marker _marker;
         [SerializeField] private Text _lastResultText;
         [SerializeField] private InputField _lastResultName;
+        
         private void Awake()
         {
             _finishTrigger = FindObjectOfType<FinishTrigger>();
@@ -31,7 +33,7 @@ namespace RacePrototype
         {
             Record newrecord;
             newrecord.name = inputText;
-            newrecord.time = 123;
+            newrecord.time = float.Parse(_lastResultText.text);
             _statistics_Controller.SaveRecord(newrecord);
             LoadStatsInfo();
 
@@ -49,7 +51,7 @@ namespace RacePrototype
         private void Start()
         {
             _marker = GetComponentInChildren<StatisticsPanel_Marker>();
-            _statistics_Controller = GetComponent<Statistics_Controller>();
+            _statistics_Controller = GetComponent<Statistics_Controller>();            
             var temp = GetComponentsInChildren<PlaceExample_Marker>();
 
             for (int i = 0; i < 10; i++)
@@ -60,6 +62,7 @@ namespace RacePrototype
             }
 
             _statistics_Controller.LoadRecords();
+            _statistics_Controller.AddListener();
             LoadStatsInfo();
             _marker.gameObject.SetActive(false);
         }

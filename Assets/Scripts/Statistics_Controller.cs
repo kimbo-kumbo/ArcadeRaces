@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 namespace RacePrototype
@@ -11,8 +13,9 @@ namespace RacePrototype
         public string name;
         public float time;
     }
-    public class Statistics_Controller : MonoBehaviour
+    public class Statistics_Controller : Base_Controller
     {
+        [SerializeField] public Button _reStart;
         public List<Record> _records = new();
         public void SaveRecord(Record newrecord)
         {
@@ -39,14 +42,19 @@ namespace RacePrototype
                 PlayerPrefs.SetFloat(i.ToString(), float.MaxValue);
             }
         }
-        private void Awake()
+        public void AddListener()
         {
-            //Initialize();
+            _reStart.onClick.AddListener(delegate { LoadScene(SceneExample.Drive); });
+        }
+
+        private void OnDisable()
+        {
+            _reStart.onClick.RemoveListener(delegate { LoadScene(SceneExample.Drive); });
         }
         public void LoadRecords()
         {
             Record record = new();
-            _records.Clear();
+            //_records.Clear();
             for (int i = 0; i < 10; i++)
             {
                 record.name = PlayerPrefs.GetString(i.ToString());
