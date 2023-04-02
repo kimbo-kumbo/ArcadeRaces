@@ -26,6 +26,11 @@ namespace RacePrototype
                 PlayerPrefs.SetFloat(i.ToString(), _records[i].time);
             }
         }
+
+        public Record ShowLastResult(Record newrecord)
+        {
+            return newrecord;
+        }
         public void Initialize()
         {
             for (int i = 0; i < 10; i++)
@@ -36,7 +41,7 @@ namespace RacePrototype
         }
         private void Awake()
         {
-            Initialize();
+            //Initialize();
         }
         public void LoadRecords()
         {

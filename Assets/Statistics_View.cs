@@ -3,17 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
+using Unity.VisualScripting;
 
 namespace RacePrototype
 {
     public class Statistics_View : MonoBehaviour
     {
         private Dictionary<int, Text[]> staticsList = new Dictionary<int, Text[]>();
-
+        private Text text;
         private Statistics_Controller _statistics_Controller;
+        private FinishTrigger _finishTrigger;
         private StatisticsPanel_Marker _marker;
-
+        [SerializeField] private Text _lastResultText;
+        [SerializeField] private InputField _lastResultName;
         private void Awake()
+        {
+            _finishTrigger = FindObjectOfType<FinishTrigger>();
+        }
+        private void OnEnable()
+        {
+            _finishTrigger.OnFinish += ViewLastResult;
+            _lastResultName.onEndEdit.AddListener(ToText);
+        }
+
+        public void ToText(string inputText)
+        {
+            Record newrecord;
+            newrecord.name = inputText;
+            newrecord.time = 123;
+            _statistics_Controller.SaveRecord(newrecord);
+            LoadStatsInfo();
+
+        }
+
+        private void ViewLastResult(Record record)
+        {
+            _lastResultText.text = record.time.ToString();
+        }
+        private void OnDisable()
+        {
+            _finishTrigger.OnFinish -= ViewLastResult;
+        }
+
+        private void Start()
         {
             _marker = GetComponentInChildren<StatisticsPanel_Marker>();
             _statistics_Controller = GetComponent<Statistics_Controller>();
@@ -28,15 +61,11 @@ namespace RacePrototype
 
             _statistics_Controller.LoadRecords();
             LoadStatsInfo();
-        }
-
-        private void Start()
-        {
             _marker.gameObject.SetActive(false);
         }
 
 
-        private void LoadStatsInfo()
+        public void LoadStatsInfo()
         {
             for (int i = 0; i < 10; i++)
             {
