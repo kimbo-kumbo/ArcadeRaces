@@ -31,7 +31,7 @@ namespace RacePrototype
 
         public void ToText(string inputText)
         {
-            _lastResultName.onEndEdit.RemoveAllListeners();
+            _lastResultName.onEndEdit.RemoveListener(ToText);
             Record newrecord;
             newrecord.name = inputText;
             newrecord.time = float.Parse(_lastResultText.text);
