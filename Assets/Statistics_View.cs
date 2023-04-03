@@ -26,22 +26,25 @@ namespace RacePrototype
         private void OnEnable()
         {
             _finishTrigger.OnFinish += ViewLastResult;
-            _lastResultName.onEndEdit.AddListener(ToText);
+            
         }
 
         public void ToText(string inputText)
         {
+            _lastResultName.onEndEdit.RemoveAllListeners();
             Record newrecord;
             newrecord.name = inputText;
             newrecord.time = float.Parse(_lastResultText.text);
             _statistics_Controller.SaveRecord(newrecord);
             LoadStatsInfo();
-
+            //_lastResultName.enabled = false;
         }
 
-        private void ViewLastResult(Record record)
+        private void ViewLastResult(float time)
         {
-            _lastResultText.text = record.time.ToString();
+            _lastResultName.onEndEdit.AddListener(ToText);
+            //_lastResultName.enabled = true;
+            _lastResultText.text = time.ToString();
         }
         private void OnDisable()
         {

@@ -16,40 +16,59 @@ namespace RacePrototype
     public class Statistics_Controller : Base_Controller
     {
         [SerializeField] public Button _reStart;
+        [SerializeField] public Button _reSetStats;
         public List<Record> _records = new();
+        private bool _gameFirstLaunch = false;
+        private Statistics_View _statistics_View;
+
         public void SaveRecord(Record newrecord)
         {
-            LoadRecords();
+            //LoadRecords();
             _records.Add(newrecord);
             _records = _records.OrderBy(p => p.time).ToList();
 
             for (int i = 0; i < 10; i++)
             {
-                PlayerPrefs.SetString(i.ToString(), _records[i].name);
                 PlayerPrefs.SetFloat(i.ToString(), _records[i].time);
+                PlayerPrefs.SetString((i+10).ToString(), _records[i].name);
+                
             }
         }
-
+        private void Start()
+        {
+            Initialize(false);
+            _gameFirstLaunch = (0 == PlayerPrefs.GetInt("_gameFirstLaunch"));
+            PlayerPrefs.SetInt("_gameFirstLaunch", 1);
+            _statistics_View = FindObjectOfType<Statistics_View>();
+        }
         public Record ShowLastResult(Record newrecord)
         {
             return newrecord;
         }
-        public void Initialize()
+        public void Initialize(bool fromButton)
         {
-            for (int i = 0; i < 10; i++)
+            if (_gameFirstLaunch || fromButton)
             {
-                PlayerPrefs.SetString(i.ToString(), "");
-                PlayerPrefs.SetFloat(i.ToString(), float.MaxValue);
+
+                for (int i = 0; i < 10; i++)
+                {
+                    
+                    PlayerPrefs.SetFloat(i.ToString(), float.MaxValue);
+                    PlayerPrefs.SetString((i + 10).ToString(), "");
+                }
+                _statistics_View.LoadStatsInfo();
             }
+            
         }
         public void AddListener()
         {
             _reStart.onClick.AddListener(delegate { LoadScene(SceneExample.Drive); });
+            _reSetStats.onClick.AddListener(delegate { Initialize(true); });
         }
 
         private void OnDisable()
         {
-            _reStart.onClick.RemoveListener(delegate { LoadScene(SceneExample.Drive); });
+            //_reStart.onClick.RemoveAllListeners();//   RemoveListener(delegate { LoadScene(SceneExample.Drive); });
         }
         public void LoadRecords()
         {
@@ -57,8 +76,9 @@ namespace RacePrototype
             //_records.Clear();
             for (int i = 0; i < 10; i++)
             {
-                record.name = PlayerPrefs.GetString(i.ToString());
+                
                 record.time = PlayerPrefs.GetFloat(i.ToString());
+                record.name = PlayerPrefs.GetString((i+10).ToString());
                 _records.Add(record);
             }
 

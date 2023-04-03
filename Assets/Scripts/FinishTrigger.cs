@@ -11,7 +11,7 @@ namespace RacePrototype
         [SerializeField] private StatisticsPanel_Marker _statisticsPanel;
         private Timer _timer;
         private Statistics_View _statistics_View;
-        public Action<Record> OnFinish;
+        public Action<float> OnFinish;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -26,11 +26,7 @@ namespace RacePrototype
 
         private void SaveStatistics()
         {
-            Record newRecord;
-            newRecord.name = "Test";
-            newRecord.time = _timer.ConvertTimeElapsedToFloat();
-
-            OnFinish?.Invoke(newRecord);
+            OnFinish?.Invoke(_timer.ConvertTimeElapsedToFloat());
 
             //_statisticsController.SaveRecord(newRecord);
         }
