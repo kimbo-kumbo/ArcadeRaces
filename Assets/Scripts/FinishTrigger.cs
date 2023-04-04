@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace RacePrototype
 {
@@ -15,25 +14,21 @@ namespace RacePrototype
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<Body_Marker>() /*|| other.GetComponent<NewPlayer>() */is null)
+            if (other.GetComponent<Body_Marker>() is null)
                 return;
 
             SaveStatistics();
-
             OnEnableStaticsPanel();
             Debug.Log("Finish");
         }
 
         private void SaveStatistics()
         {
-            OnFinish?.Invoke(_timer.ConvertTimeElapsedToFloat());
-
-            //_statisticsController.SaveRecord(newRecord);
+            OnFinish?.Invoke(_timer.ConvertTimeElapsedToFloat());           
         }
 
         private void Start()
-        {
-            //_statisticsController = FindObjectOfType<Statistics_Controller>();
+        {            
             _timer = FindObjectOfType<Timer>();
             _statistics_View = FindObjectOfType<Statistics_View>();
         }

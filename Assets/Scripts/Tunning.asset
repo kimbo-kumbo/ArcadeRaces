@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95bc058ab3df514c8c77630be0c4289, type: 3}
   m_Name: Tunning
   m_EditorClassIdentifier: 
-  _maxSteerAngle: 31.8
-  _damperAvto: 430
-  _massAvto: 599
-  _centerMassAvto: 1354
-  _slidingTires: 887
+  _maxSteerAngle: 30
+  _damperAvto: 1
+  _massAvto: 600
+  _centerMassAvto: 0
+  _torque: 2000

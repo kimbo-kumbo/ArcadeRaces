@@ -1,11 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.UIElements;
 
 
 namespace RacePrototype
@@ -13,19 +8,17 @@ namespace RacePrototype
     public class Tuning_Controller : Base_Controller
     {
         [SerializeField] private TuningSO_Model tuningSO;
-        [SerializeField] private Slider _sliderStearAngle; //угол попорота колёс
-        [SerializeField] private Slider _sliderDamperAvto; //жесткость подвески
-        [SerializeField] private Slider _sliderMassAvto; //масса автомобиля
-        [SerializeField] private Slider _sliderCenterMassAvto; //центр масс автомобиля
-        [SerializeField] private Slider _sliderTorqie; // крутящий момент
-
+        [SerializeField] private Slider _sliderStearAngle; 
+        [SerializeField] private Slider _sliderDamperAvto; 
+        [SerializeField] private Slider _sliderMassAvto; 
+        [SerializeField] private Slider _sliderCenterMassAvto; 
+        [SerializeField] private Slider _sliderTorqie;
         [SerializeField] private Button _driveButton;
         [SerializeField] private Button _mainMenuButton;
         public Action<TuningSO_Model> OnValueChange;
 
         private void OnEnable()
-        {
-            //заполняем данные UI из SO
+        {            
             _sliderStearAngle.value = tuningSO.MaxSteerAngle;
             _sliderDamperAvto.value = tuningSO.DamperAvto ;
             _sliderMassAvto.value = tuningSO.MassAvto ;
@@ -44,8 +37,7 @@ namespace RacePrototype
 
 
         private void Update()
-        {
-            //заполняем данные SO из UI
+        {            
             tuningSO.MaxSteerAngle = _sliderStearAngle.value;            
             tuningSO.DamperAvto = _sliderDamperAvto.value;
             tuningSO.MassAvto = _sliderMassAvto.value;

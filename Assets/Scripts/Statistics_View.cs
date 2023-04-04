@@ -1,18 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
-using System;
+
 
 namespace RacePrototype
 {
     public class Statistics_View : MonoBehaviour
     {
         private Dictionary<int, Text[]> staticsList = new Dictionary<int, Text[]>();
-        private Text text;
         private Statistics_Controller _statistics_Controller;
         private FinishTrigger _finishTrigger;
         private StatisticsPanel_Marker _marker;
@@ -25,8 +21,7 @@ namespace RacePrototype
         }
         private void OnEnable()
         {
-            _finishTrigger.OnFinish += ViewLastResult;
-            
+            _finishTrigger.OnFinish += ViewLastResult;            
         }
 
         public void ToText(string inputText)
@@ -36,14 +31,12 @@ namespace RacePrototype
             newrecord.name = inputText;
             newrecord.time = float.Parse(_lastResultText.text);
             _statistics_Controller.SaveRecord(newrecord);
-            LoadStatsInfo();
-            //_lastResultName.enabled = false;
+            LoadStatsInfo();            
         }
 
         private void ViewLastResult(float time)
         {
-            _lastResultName.onEndEdit.AddListener(ToText);
-            //_lastResultName.enabled = true;
+            _lastResultName.onEndEdit.AddListener(ToText);            
             _lastResultText.text = time.ToString();
         }
         private void OnDisable()
@@ -59,7 +52,7 @@ namespace RacePrototype
 
             for (int i = 0; i < 10; i++)
             {
-                staticsList.Add(i, new Text[] { temp.First(x => x.index == i).GetComponentInChildren<PlaceTim_Marker>().GetComponent<Text>(), temp.First(x => x.index == i).GetComponentInChildren<DriverName_Marker>().GetComponent<Text>() });
+                staticsList.Add(i, new Text[] { temp.First(x => x.Index == i).GetComponentInChildren<PlaceTim_Marker>().GetComponent<Text>(), temp.First(x => x.Index == i).GetComponentInChildren<DriverName_Marker>().GetComponent<Text>() });
                 Text[] tempList = staticsList[i];
                 tempList[1].text = i.ToString();
             }
@@ -76,8 +69,16 @@ namespace RacePrototype
             for (int i = 0; i < 10; i++)
             {
                 Text[] tempList = staticsList[i];
-                tempList[1].text = _statistics_Controller._records[i].name;
-                tempList[0].text = _statistics_Controller._records[i].time.ToString();
+                if (_statistics_Controller.Records[i].time == float.MaxValue)
+                {                    
+                    tempList[0].text = "0";
+                }
+                else
+                {
+                    tempList[0].text = _statistics_Controller.Records[i].time.ToString();
+                }
+                tempList[1].text = _statistics_Controller.Records[i].name;
+                
             }
         }
     }

@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 namespace RacePrototype
 {
     public class MainMenu_Controllert : Base_Controller
     {
-
         [SerializeField] private Button _start;
         [SerializeField] private Button _tuning;
         [SerializeField] private Button _exit;
-
 
         private void OnEnable()
         {

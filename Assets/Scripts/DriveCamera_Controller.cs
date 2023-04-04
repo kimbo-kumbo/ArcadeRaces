@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DriveCamera_Controller : MonoBehaviour
-{   
-    public Transform targetRotate; 
+namespace RacePrototype
+{
+    public class DriveCamera_Controller : MonoBehaviour
+    {
+        [SerializeField] private Transform targetRotate;
 
-    private void Update()
-    {     
-        transform.LookAt(targetRotate);        
+        private void Update()
+        {
+            transform.LookAt(targetRotate);
+        }
     }
 }

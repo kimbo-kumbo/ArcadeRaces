@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RacePrototype
@@ -13,13 +10,11 @@ namespace RacePrototype
         private Rigidbody _rigidbody;
         private Speedometr _speedometr;
 
-        [SerializeField, Range(5f, 60f)]
+        //[SerializeField, Range(5f, 60f)]
         private float _maxSteerAngle = 25f;
-        [SerializeField]
-        private float _torque = 2500f;
         //[SerializeField]
-        private float _handBrakeTorque = float.MaxValue;
-        [SerializeField]
+        private float _torque ;        
+        private float _handBrakeTorque = float.MaxValue;        
         private Vector3 _centerOfMass = Vector3.zero;
 
         [SerializeField] private TuningSO_Model _tuningSOmodel;
@@ -37,13 +32,13 @@ namespace RacePrototype
                 {
                     _movingForward = true;
                     OnBrake(false);
-                    torque = _input.Acceleration * _torque;// / 2f;
+                    torque = _input.Acceleration * _torque;
                 }
                 else
                 {
                     _movingForward = false;
                     OnBrake(false);
-                    torque = -_input.Acceleration * _torque;// / 2f;
+                    torque = -_input.Acceleration * _torque;
                 }
             }
             if (_movingForward)
@@ -51,7 +46,7 @@ namespace RacePrototype
                 if (_input.Acceleration > 0)
                 {
                     OnBrake(false);
-                    torque = _input.Acceleration * _torque;// / 2f;
+                    torque = _input.Acceleration * _torque;
                 }
                 else
                 {
@@ -63,16 +58,13 @@ namespace RacePrototype
                 if (_input.Acceleration < 0)
                 {
                     OnBrake(false);
-                    torque = _input.Acceleration * _torque;// / 2f;
+                    torque = _input.Acceleration * _torque;
                 }
                 else
                 {
                     OnBrake(true);
                 }
-            }
-
-
-            //foreach (var wheel in _wheels.GetFrontWheels)//сделал задний привод. это ж мустанг ))
+            }            
             foreach (var wheel in _wheels.GetRearWheels)
             {
                 wheel.motorTorque = torque;
@@ -116,13 +108,11 @@ namespace RacePrototype
 
 
         private void Start()
-        {           
-
+        {     
             _wheels = GetComponent<WheelsComponent>();
             _input = GetComponent<BaseInputController>();
             _rigidbody = GetComponent<Rigidbody>();
-            _rigidbody.centerOfMass = _centerOfMass;//центр массы
-
+            _rigidbody.centerOfMass = _centerOfMass;
             _speedometr = FindObjectOfType<Speedometr>();
             
             _wheels.ChangeSettingsWhealsColliderAvto(_tuningSOmodel);
@@ -140,9 +130,7 @@ namespace RacePrototype
             _torque = incomingValue.Torque;
             _centerOfMass = new Vector3(0, 0, incomingValue.CenterMassAvto);
             _maxSteerAngle = incomingValue.MaxSteerAngle;
-            _rigidbody.mass = incomingValue.MassAvto;  
-
-
+            _rigidbody.mass = incomingValue.MassAvto;
         }
     }
 }

@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
+
 
 namespace RacePrototype
 {
     public struct Record
-    {
-        //public int id;
+    {       
         public string name;
         public float time;
 
@@ -21,15 +19,16 @@ namespace RacePrototype
     }
     public class Statistics_Controller : Base_Controller
     {
-        [SerializeField] public Button _reStart;
-        [SerializeField] public Button _reSetStats;
-        public List<Record> _records = new();
+        [SerializeField] private Button _reStart;
+        [SerializeField] private Button _reSetStats;
+        private List<Record> _records = new();
         private bool _gameFirstLaunch = false;
         private Statistics_View _statistics_View;
 
+        public List<Record> Records => _records;
+
         public void SaveRecord(Record newrecord)
-        {
-            //LoadRecords();
+        {            
             _records.Add(newrecord);
             _records = _records.OrderBy(p => p.time).ToList();
 
@@ -70,15 +69,10 @@ namespace RacePrototype
             _reStart.onClick.AddListener(delegate { LoadScene(SceneExample.Drive); });
             _reSetStats.onClick.AddListener(ResetStatsInfo);
         }
-
-        private void OnDisable()
-        {
-            //_reStart.onClick.RemoveAllListeners();//   RemoveListener(delegate { LoadScene(SceneExample.Drive); });
-        }
+       
         public void LoadRecords()
         {
-            Record record = new();
-            //_records.Clear();
+            Record record = new();            
             for (int i = 0; i < 10; i++)
             {
                 

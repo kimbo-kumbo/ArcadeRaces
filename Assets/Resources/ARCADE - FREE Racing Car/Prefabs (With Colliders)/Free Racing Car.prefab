@@ -651,10 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d330b8f6b920af46bbc4d89bccd40da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSteerAngle: 30
-  _torque: 500
-  _centerOfMass: {x: 0, y: 0, z: 0}
-  _tuningSOmodel: {fileID: 0}
+  _tuningSOmodel: {fileID: 11400000, guid: 424f132c64c4ce64f911284595ca27f4, type: 2}
 --- !u!1 &3962000127133956386
 GameObject:
   m_ObjectHideFlags: 0

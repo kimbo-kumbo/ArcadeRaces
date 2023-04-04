@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,12 +39,10 @@ namespace RacePrototype
             {
                 var distance = Vector3.Distance(prevPos, _player.position);
                 _speed = (float)System.Math.Round(distance / _delay * c_convertMeterInSecFromKmInH, 1);
-
                 _text.color = Color.Lerp(_minColor, _maxColor, _speed / _maxSpeed);
                 _text.text = _speed.ToString();
                 prevPos = _player.position;
-                yield return new WaitForSeconds(_delay);
-            
+                yield return new WaitForSeconds(_delay);            
             }
         }
     }

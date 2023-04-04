@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RacePrototype
 {
     public class Camera_Controller : MonoBehaviour
     {
-        [SerializeField] private float _speedRotate;
+        [SerializeField]private float _speedRotate;
         private void Update()
         {
             if (Input.GetKey(KeyCode.A))

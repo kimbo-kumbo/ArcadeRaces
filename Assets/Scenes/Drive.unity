@@ -460,7 +460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346546338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.14, y: 10.6, z: -2.7}
+  m_LocalPosition: {x: -41.1, y: 10.6, z: 167.04}
   m_LocalScale: {x: 21.65, y: 3.62, z: 1.53}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2539,9 +2539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d330b8f6b920af46bbc4d89bccd40da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSteerAngle: 35
-  _torque: 1000
-  _centerOfMass: {x: 0, y: 0, z: 0}
   _tuningSOmodel: {fileID: 11400000, guid: 424f132c64c4ce64f911284595ca27f4, type: 2}
 --- !u!114 &1252810852
 MonoBehaviour:
@@ -4466,7 +4463,7 @@ WheelCollider:
     damper: 2500
     targetPosition: 0.7
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0.2
   m_Mass: 20
   m_WheelDampingRate: 1
   m_ForwardFriction:
@@ -4645,7 +4642,7 @@ WheelCollider:
     damper: 2500
     targetPosition: 0.7
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0.2
   m_Mass: 20
   m_WheelDampingRate: 1
   m_ForwardFriction:
@@ -4732,7 +4729,7 @@ WheelCollider:
     damper: 2500
     targetPosition: 0.7
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0.2
   m_Mass: 20
   m_WheelDampingRate: 1
   m_ForwardFriction:
@@ -4934,7 +4931,7 @@ WheelCollider:
     damper: 2500
     targetPosition: 0.7
   m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0.2
   m_Mass: 20
   m_WheelDampingRate: 1
   m_ForwardFriction:
@@ -4962,7 +4959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e053aa20173da4091bee2f228c8b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
 --- !u!224 &5346349266623327431
 RectTransform:
   m_ObjectHideFlags: 0
